@@ -121,4 +121,4 @@ $$
 
 ## ライセンス
 
-コード: MIT License
+License: To be determined.
