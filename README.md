@@ -4,6 +4,7 @@
 
 このリポジトリは、3次元格子 `L × L × L` 上にハミルトン路を構成し、その経路に沿って整数
 
+
 $$
 1, 2, \ldots, L^3
 $$
@@ -287,6 +288,15 @@ python src/22_hamiruton_balanced.py
 
 ---
 
+## Notes
+
+- `notes/2026-05-04_modular_residue_peak_note.md`  
+  Snake型ハミルトン配置における合同剰余ピークの初期観測ノート。
+
+- `notes/2026-05-04_balanced_peak_rate_3way_note.md`  
+  方向均衡ハミルトン路との比較、および `current / strict / tie` の3種類の peak_rate 指標を整理したノート。
+
+---
 ## ライセンス
 
 License: To be determined.
