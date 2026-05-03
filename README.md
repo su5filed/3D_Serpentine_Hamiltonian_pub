@@ -104,12 +104,23 @@ $$
 ├─ notes/
 │  └─ 2026-05-04_modular_residue_peak_note.md
 ├─ src/
+│  ├─ 02_hamiruton_2.py
 │  └─ 12_hamiruton.py
 ├─ logs/
 │  └─ 12.txt
 └─ images/
-   └─ prime_lattice_L15.png
+   ├─ figure1_prime_lattice_L5.png
+   └─ figure2_prime_layers_L5.png
 ```
+ファイルの役割
+- src/02_hamiruton_2.py
+  3D Snake型ハミルトン路に沿って整数を配置し、素数点を3D表示・画像保存するための可視化用コード。
+- src/12_hamiruton.py
+  L % mod = 1 のときに剰余ピーク peak_r = (s+1) mod m が現れるかを調べる解析用コード。
+- logs/12.txt
+  run_mod_sweep() による実験ログ。
+- notes/2026-05-04_modular_residue_peak_note.md
+  計算実験に基づく研究ノート v0.1。
 
 ## 注意
 
