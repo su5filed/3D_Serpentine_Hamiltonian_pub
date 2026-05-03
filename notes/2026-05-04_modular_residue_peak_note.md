@@ -5,6 +5,8 @@
 状態: 計算実験メモ / 予想段階  
 著者: su5filed@gmail.com
 
+> Update: このノートは初期観測の記録です。方向均衡ハミルトン路との比較および peak_rate の 3-way 指標については、`2026-05-04_balanced_peak_rate_3way_note.md` を参照してください。
+
 ---
 
 ## 1. 背景
