@@ -56,6 +56,10 @@ $$
 
 ![Prime positions on a direction-balanced Hamiltonian lattice](images_balanced/figure_balanced_prime_lattice_L8.png)
 
+### Figure. Distribution of 3-way peak rates for balanced Hamiltonian paths
+
+![Distribution of 3-way peak rates](images_balanced/peak_rate_3way_hist_L8_mod7.png)
+
 ---
 
 ## 観測1: Snake型ハミルトン配置の合同ピーク
