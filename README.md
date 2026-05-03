@@ -34,6 +34,16 @@ $$
 
 これはまだ証明済みの定理ではなく、計算実験に基づく観測および予想です。
 
+## Figures
+
+### Figure 1. Prime positions on a 3D Snake-type Hamiltonian lattice
+
+![Prime positions on a 3D Snake-type Hamiltonian lattice](images/figure1_prime_lattice_L5.png)
+
+### Figure 2. Prime positions by z-layers
+
+![Prime positions by z-layers](images/figure2_prime_layers_L5.png)
+
 ## 観測した現象
 
 Snake型ハミルトン配置において、法 `m` に対して `L % m = 1` となる場合、斜め平面 `x+y+z=s` 上の奇数番号 `n` の剰余分布で、最多剰余 `peak_r` が
