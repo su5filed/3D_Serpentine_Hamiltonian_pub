@@ -246,7 +246,46 @@ $$
 └─ images_balanced/
    └─ figure_balanced_prime_lattice_L8.png
 ```
+## ファイル説明
 
+| パス | 種別 | 説明 |
+|---|---|---|
+| `README.md` | 概要文書 | このリポジトリ全体の概要、観測した現象、実験結果、今後の予定をまとめた入口文書です。 |
+| `notes/2026-05-04_modular_residue_peak_note.md` | 研究ノート | Snake型ハミルトン路で最初に観測した、`L ≡ 1 mod m` のときの合同剰余ピーク現象を記録した初期ノートです。 |
+| `notes/2026-05-04_balanced_peak_rate_3way_note.md` | 研究ノート | 方向均衡ハミルトン路との比較実験、および `current_peak_rate` / `strict_peak_rate` / `tie_peak_rate` の3種類の指標を整理した発展ノートです。 |
+| `src/12_hamiruton.py` | Pythonコード | Snake型ハミルトン路を構成し、3D格子上に整数を配置して、素数点・斜め平面ごとの剰余ピーク・合同構造を調べるための初期実験コードです。 |
+| `src/22_hamiruton_balanced.py` | Pythonコード | 方向均衡寄りの3Dハミルトン路を生成し、Snake型との比較、seed sweep、modular alignment、3種類の peak_rate 指標を解析する発展版コードです。 |
+| `logs/12.txt` | 実験ログ | `src/12_hamiruton.py` によるSnake型ハミルトン配置の実行結果を保存したログです。 |
+| `logs/22.txt` | 実験ログ | `src/22_hamiruton_balanced.py` による方向均衡ハミルトン路の `L=8, mod=7, seed=0..49` 実験結果を保存したログです。 |
+| `images/figure1_prime_lattice_L5.png` | 図 | `L=5` のSnake型ハミルトン格子上における素数点の3D表示です。 |
+| `images/figure2_prime_layers_L5.png` | 図 | `L=5` のSnake型ハミルトン格子について、素数点をz層ごとに分けて表示した図です。 |
+| `images_balanced/figure_balanced_prime_lattice_L8.png` | 図 | `L=8` の方向均衡ハミルトン路上における素数点の3D表示です。 |
+
+## 実験の流れ
+
+このリポジトリでは、主に次の順番で実験を進めています。
+
+1. `src/12_hamiruton.py` で Snake型ハミルトン路を作る。
+2. 経路に沿って `1,2,...,L^3` を3D格子点へ配置する。
+3. 素数だけを3D上に表示する。
+4. 斜め平面 `s=x+y+z` ごとに、奇数番号 `n` の剰余分布を調べる。
+5. Snake型で見えた合同ピークが一般的な性質かを調べるため、`src/22_hamiruton_balanced.py` で方向均衡ハミルトン路と比較する。
+6. `current_peak_rate` / `strict_peak_rate` / `tie_peak_rate` の3種類の指標で、合同ピークの強さを評価する。
+
+## 主要コードの役割
+
+### `src/12_hamiruton.py`
+
+Snake型ハミルトン路を基準モデルとして扱うコードです。
+
+このコードでは、3D格子 `L × L × L` をSnake状に一筆書きし、その順番に整数を配置します。その後、素数点の可視化や、斜め平面ごとの剰余分布を調べます。
+
+主に、次の現象を観測するために使います。
+
+```text
+L ≡ 1 mod m のとき、
+peak_r ≡ s+1 mod m
+が強く現れるか
 ---
 
 ## 実行例
