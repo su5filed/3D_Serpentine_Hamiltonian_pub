@@ -58,13 +58,30 @@ $$
 となる斜め平面では、`p` の倍数が相対的に多く配置されるため、素数密度が低下しやすい可能性があります。  
 これは、3D格子上に現れる素数の縞模様や欠乏平面を説明する手がかりになると考えています。
 
+> 追記: 2026-05-05  
+> Snake型ハミルトン配置については、条件を
+>
+> - `m` は奇数、`m >= 3`
+> - `L ≡ 1 (mod m)`
+> - 偶数斜め平面 `x+y+z=s`
+> - 同率ピークを許す弱版
+>
+> に限定した場合、`n ≡ s+1 (mod m)` の剰余クラスが最多剰余クラスの1つになることを、領域分割により証明整理しました。
+>
+> 証明ノート:
+> [`notes/2026-05-05_weak_congruence_peak_theorem_odd_m.md`](notes/2026-05-05_weak_congruence_peak_theorem_odd_m.md)
+> 
 
 ---
 
 ## 現在の状態
 
-これはまだ証明済みの定理ではありません。  
-現時点では、計算実験に基づく観測・予想・比較結果です。
+現時点では、次のように整理しています。
+
+- Snake型ハミルトン配置について、`m` が奇数、`m >= 3`、`L ≡ 1 (mod m)` の場合、同率ピークを許す弱版の合同ピーク定理を証明整理しました。
+- 証明ノートは `notes/2026-05-05_weak_congruence_peak_theorem_odd_m.md` にまとめています。
+- ただし、偶数 `m`、単独ピーク版、Snake型以外の一般ハミルトン路については未証明です。
+- 方向均衡ハミルトン路については、Snake型現象との比較実験として扱っています。
 
 ---
 
@@ -346,7 +363,8 @@ $$
 ├─ README.md
 ├─ notes/
 │  ├─ 2026-05-04_modular_residue_peak_note.md
-│  └─ 2026-05-04_balanced_peak_rate_3way_note.md
+│  ├─ 2026-05-04_balanced_peak_rate_3way_note.md
+│  └─ 2026-05-05_weak_congruence_peak_theorem_odd_m.md
 ├─ src/
 │  ├─ 12_hamiruton.py
 │  ├─ 22_hamiruton_balanced.py
@@ -368,6 +386,7 @@ $$
 | `README.md` | 概要文書 | このリポジトリ全体の概要、観測した現象、実験結果、今後の予定をまとめた入口文書です。 |
 | `notes/2026-05-04_modular_residue_peak_note.md` | 研究ノート | Snake型ハミルトン路で最初に観測した、`L ≡ 1 mod m` のときの合同剰余ピーク現象を記録した初期ノートです。 |
 | `notes/2026-05-04_balanced_peak_rate_3way_note.md` | 研究ノート | 方向均衡ハミルトン路との比較実験、および `current_peak_rate` / `strict_peak_rate` / `tie_peak_rate` の3種類の指標を整理した発展ノートです。 |
+| `notes/2026-05-05_weak_congruence_peak_theorem_odd_m.md` | 証明ノート | Snake型ハミルトン配置について、奇数 `m`・`L ≡ 1 (mod m)`・偶数斜め平面に限定した弱合同ピーク定理の証明整理ノートです。|
 | `src/12_hamiruton.py` | Pythonコード | Snake型ハミルトン路を構成し、3D格子上に整数を配置して、素数点・斜め平面ごとの剰余ピーク・合同構造を調べるための初期実験コードです。 |
 | `src/22_hamiruton_balanced.py` | Pythonコード | 方向均衡寄りの3Dハミルトン路を生成し、Snake型との比較、seed sweep、modular alignment、3種類の peak_rate 指標を解析する発展版コードです。 |
 | `logs/12.txt` | 実験ログ | `src/12_hamiruton.py` によるSnake型ハミルトン配置の実行結果を保存したログです。 |
@@ -409,29 +428,31 @@ peak_r ≡ s+1 mod m
 python src/12_hamiruton.py
 ```
 
-
 ## 注意
 
 現時点では、以下は未完了です。
 
-- 一般の場合の証明
-- 反例探索
-- 既存研究との詳細比較
+- 偶数 `m` の場合の証明
+- `n ≡ s+1 (mod m)` が単独ピークになる条件の証明
+- Snake型以外の一般ハミルトン路に対する証明
 - 方向均衡ハミルトン路以外の経路族との比較
 - ランダムなハミルトン路全体に対する統計的検証
-- Snake型配置の明示的な番号式の導出
+- 既存研究との詳細比較
 
----
+一方で、Snake型ハミルトン配置については、奇数 `m`・`L ≡ 1 (mod m)`・同率ピークを許す弱版について、証明整理ノートを追加しています。
+
 
 ## 今後の予定
 
-1. Snake型配置の番号式を導出する
-2. `L ≡ 1 mod m` のときの剰余分布を証明する
-3. `strict_peak_rate` / `tie_peak_rate` を Snake型にも適用する
-4. 方向均衡型について `L` と `mod` を増やして seed sweep する
-5. 他のハミルトン路生成法と比較する
-6. 反例探索を行う
-7. 3D可視化画像・動画を作成する
+1. 奇数 `m` 版の弱合同ピーク定理の証明ノートをさらに清書する
+2. `s=2`, `s=4`, `upper_near` などの境界ケースの列挙表を補足する
+3. `central_thick` で用いる class-sum 差分補題を独立した補題として整理する
+4. 偶数 `m` の場合を調べる
+5. `strict_peak_rate` / `tie_peak_rate` を Snake型にも適用する
+6. 方向均衡型について `L` と `mod` を増やして seed sweep する
+7. 他のハミルトン路生成法と比較する
+8. 反例探索を行う
+9. 3D可視化画像・動画を作成する
 
 ---
 ## 用語メモ
@@ -452,6 +473,9 @@ python src/12_hamiruton.py
 - `notes/2026-05-04_balanced_peak_rate_3way_note.md`  
   方向均衡ハミルトン路との比較、および `current / strict / tie` の3種類の peak_rate 指標を整理したノート。
 
+* `notes/2026-05-05_weak_congruence_peak_theorem_odd_m.md`  
+  Snake型ハミルトン配置における、奇数 `m` 版の弱合同ピーク定理の証明整理ノート。
+  
 ---
 ## ライセンス
 
