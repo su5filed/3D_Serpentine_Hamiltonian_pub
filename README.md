@@ -349,13 +349,15 @@ $$
 │  └─ 2026-05-04_balanced_peak_rate_3way_note.md
 ├─ src/
 │  ├─ 12_hamiruton.py
-│  └─ 22_hamiruton_balanced.py
+│  ├─ 22_hamiruton_balanced.py
+│  └─ 23_plot_snake_planes.py
 ├─ logs/
 │  ├─ 12.txt
 │  └─ 22.txt
 ├─ images/
 │  ├─ figure1_prime_lattice_L5.png
-│  └─ figure2_prime_layers_L5.png
+│  ├─ figure2_prime_layers_L5.png
+│  └─ figure_snake_prime_lattice_planes_L15.png
 └─ images_balanced/
    └─ figure_balanced_prime_lattice_L8.png
 ```
