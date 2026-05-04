@@ -100,9 +100,9 @@ $$
 すなわち、任意の非ゼロ剰余 `a` に対して、
 
 $$
-\#\{(x,y,z): x+y+z=s,\ e(x,y,z)=0\}
+\left|\{(x,y,z): x+y+z=s,\ e(x,y,z)=0\}\right|
 \ge
-\#\{(x,y,z): x+y+z=s,\ e(x,y,z)=a\}
+\left|\{(x,y,z): x+y+z=s,\ e(x,y,z)=a\}\right|
 $$
 
 が成り立つ。
