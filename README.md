@@ -41,24 +41,87 @@ $$
 で定義し、各斜め平面上の奇数番号 `n` の剰余分布を調べます。
 
 ---
-
 ## Figure
+
+この章では、本リポジトリで行った計算実験の可視化結果を示します。
+
+Figure 1 と Figure 2 は、最初の基準モデルである **Snake型ハミルトン路** による整数配置を可視化したものです。  
+Snake型では、3D格子を層ごとにジグザグに走査し、その一筆書き順に整数 `1,2,...,L^3` を配置します。  
+この配置で素数がどのように現れるかを、まず小さい `L=5` の格子で確認しています。
+
+Figure 3 は、Snake型との比較対象として作成した **方向均衡ハミルトン路** の可視化です。  
+方向均衡型では、x方向・y方向・z方向への移動回数がなるべく均等になるように経路を生成します。  
+これにより、Snake型で見えた合同ピーク現象が、Snake型特有の走査順序に依存するのかを調べます。
+
+Figure 4 は、方向均衡ハミルトン路に対する `current_peak_rate` / `strict_peak_rate` / `tie_peak_rate` の分布を示した図です。  
+これは、合同ピークが「単独ピーク」として強く出ているのか、それとも「同率ピーク」として弱く残っているのかを比較するための図です。
+
+Figure 5 は、Snake型ハミルトン配置において、素数位置と代表的な斜め平面 `x+y+z=s` を同時に表示した図です。  
+観測1で扱う合同剰余ピークは、このような斜め平面ごとの剰余分布に注目しています。  
+特に `L=15, mod=7` の場合、`x+y+z=6,20,34` は合同構造や素数密度の変化を観察するための代表的な平面です。
+
+以下の図は、いずれも「3D格子上の一筆書き順序」と「素数・剰余分布・斜め平面」の関係を理解するための補助図です。
+
 
 ### Figure 1. Prime positions on a 3D Snake-type Hamiltonian lattice
 
 ![Prime positions on a 3D Snake-type Hamiltonian lattice](images/figure1_prime_lattice_L5.png)
 
+この図では、`5 × 5 × 5` の3D格子に Snake型ハミルトン路で整数 `1..125` を配置し、そのうち素数に対応する格子点を強調表示しています。  
+Snake型の規則的な一筆書き順序に沿って整数を配置したとき、素数点が3D空間内でどのように現れるかを確認するための基本図です。  
+
+関連コード: `src/12_hamiruton.py`
+
+---
+
 ### Figure 2. Prime positions by z-layers
 
 ![Prime positions by z-layers](images/figure2_prime_layers_L5.png)
+
+この図では、`5 × 5 × 5` の3D格子を `z` 層ごとに分解し、各層に配置された整数と素数位置を表示しています。  
+3D表示だけでは見えにくい層ごとの配置を確認できるため、Snake型ハミルトン路による番号付けと、素数位置の関係を平面的に観察できます。  
+
+関連コード: `src/12_hamiruton.py`
+
+---
 
 ### Figure 3. Prime positions on a direction-balanced Hamiltonian lattice
 
 ![Prime positions on a direction-balanced Hamiltonian lattice](images_balanced/figure_balanced_prime_lattice_L8.png)
 
-### Figure. Distribution of 3-way peak rates for balanced Hamiltonian paths
+この図では、`8 × 8 × 8` の3D格子に方向均衡ハミルトン路で整数を配置し、素数位置を強調表示しています。  
+方向均衡ハミルトン路では、x方向・y方向・z方向への移動回数がなるべく均等になるように経路を生成しています。  
+Snake型ハミルトン路で観測された合同ピークが、より方向バランスの良い経路でも現れるかを比較するための図です。  
+
+関連コード: `src/22_hamiruton_balanced.py`
+
+---
+
+### Figure 4. Distribution of 3-way peak rates for balanced Hamiltonian paths
 
 ![Distribution of 3-way peak rates](images_balanced/peak_rate_3way_hist_L8_mod7.png)
+
+この図では、方向均衡ハミルトン路に対して、`current_peak_rate`、`strict_peak_rate`、`tie_peak_rate` の3種類の peak rate の分布を比較しています。  
+対象は `L=8, mod=7, seed=0..49` の50本の方向均衡ハミルトン路です。
+
+`current_peak_rate` は既存実装上の一致率、`strict_peak_rate` は期待剰余が単独ピークになる割合、`tie_peak_rate` は期待剰余が同率ピーク集合に含まれる割合を表します。  
+この図により、方向均衡型では強い単独ピークは平均的に弱まる一方、同率ピークまで含めると弱い合同構造が残る場合があることを確認できます。  
+
+関連コード: `src/22_hamiruton_balanced.py`
+
+---
+
+### Figure 5. Prime positions and selected diagonal planes in the Snake Hamiltonian lattice
+
+![Prime positions and selected diagonal planes in the Snake Hamiltonian lattice](images/figure_snake_prime_lattice_planes_L15.png)
+
+この図では、`15 × 15 × 15` 格子に Snake型ハミルトン路で整数 `1..3375` を配置し、素数位置を強調表示しています。  
+また、観測1で用いる斜め平面 `x+y+z = 6, 20, 34` を例として半透明で描画しています。
+
+これらの平面は、合同剰余ピークや素数密度の変化を観察するための代表例です。  
+特に `mod=7` の場合、`s+1 ≡ 0 (mod 7)` となる平面では、7の倍数が相対的に多くなり、素数密度が低下しやすい可能性があります。  
+
+関連コード: `src/12_hamiruton.py`
 
 ---
 
