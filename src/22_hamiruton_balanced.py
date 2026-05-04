@@ -4356,6 +4356,94 @@ def run_peak_rate_3way_sweep(
         rows=rows,
     )
 
+    plot_peak_rate_3way_histogram(
+        rows,
+        L=L,
+        mod_value=mod_value,
+        save_path=f"images_balanced/peak_rate_3way_hist_L{L}_mod{mod_value}.png",
+    )    
+
+def plot_peak_rate_3way_histogram(
+    rows,
+    L=8,
+    mod_value=7,
+    save_path="images_balanced/peak_rate_3way_hist_L8_mod7.png",
+):
+    """
+    current / strict / tie の peak_rate 分布を棒グラフで保存する。
+
+    rows は run_peak_rate_3way_sweep() 内で作っている rows を想定。
+    各 row には以下が含まれる想定:
+      - current_rate
+      - strict_rate
+      - tie_rate
+    """
+    if not rows:
+        print("plot_peak_rate_3way_histogram: rows が空です")
+        return
+
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+    # L=8, mod=7 では対象平面 total=8 なので、
+    # rate は 0/8, 1/8, ..., 8/8 の離散値になる。
+    bins = [i / 8 for i in range(9)]
+
+    current_counts = {v: 0 for v in bins}
+    strict_counts = {v: 0 for v in bins}
+    tie_counts = {v: 0 for v in bins}
+
+    def round_rate(v):
+        # 浮動小数誤差対策
+        return round(v * 8) / 8
+
+    for r in rows:
+        current_counts[round_rate(r["current_rate"])] += 1
+        strict_counts[round_rate(r["strict_rate"])] += 1
+        tie_counts[round_rate(r["tie_rate"])] += 1
+
+    x = list(range(len(bins)))
+    width = 0.25
+
+    fig = plt.figure(figsize=(11, 6))
+    ax = fig.add_subplot(111)
+
+    ax.bar(
+        [i - width for i in x],
+        [current_counts[v] for v in bins],
+        width=width,
+        label="current_peak_rate",
+    )
+
+    ax.bar(
+        x,
+        [strict_counts[v] for v in bins],
+        width=width,
+        label="strict_peak_rate",
+    )
+
+    ax.bar(
+        [i + width for i in x],
+        [tie_counts[v] for v in bins],
+        width=width,
+        label="tie_peak_rate",
+    )
+
+    ax.set_title(f"Distribution of 3-way peak rates: L={L}, mod={mod_value}")
+    ax.set_xlabel("peak_rate")
+    ax.set_ylabel("number of seeds")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels([f"{i}/8\n{v:.3f}" for i, v in enumerate(bins)])
+
+    ax.legend()
+    ax.grid(axis="y", alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"保存しました: {save_path}")
+
 # ============================================================
 # 10. main
 # ============================================================
